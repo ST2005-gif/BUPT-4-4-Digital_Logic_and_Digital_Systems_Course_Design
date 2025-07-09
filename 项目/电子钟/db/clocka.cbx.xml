@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="clocka">
+		<CBX_INST_ENTRY INSTANCE_NAME="|clocka|lpm_add_sub:Add0" CBX_FILE_NAME="add_sub_qnh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|clocka|lpm_add_sub:Add1" CBX_FILE_NAME="add_sub_3kh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|clocka|lpm_add_sub:Add3" CBX_FILE_NAME="add_sub_3kh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|clocka|lpm_add_sub:Add5" CBX_FILE_NAME="add_sub_3kh.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

@@ -1,0 +1,196 @@
+module clocka(input clk,//时钟输入
+				input sing_clk,
+                 input clr,//置零信号
+                 input alarm_switch,//切换为设定闹钟模式
+                 input set_button,//设置按钮
+                 input change_button,//切换下一个显示按钮
+                 input set_time_button,
+                 output [0:6] r_s_g,//秒的个位数显示
+                 output [3:0] r_s,//秒的十位数显示
+                 output [3:0] r_m_g,//分钟的个位数显示
+                 output [3:0] r_m,//分钟的十位数显示
+                 output [3:0] r_h_g,//小时的个位数显示
+                 output [3:0] r_h,//小时的十位数显示
+                 output reg speaker
+                );//输入信号和输出信号
+    parameter FREQ_C1 = 190;  // C1 频率 (262 Hz)
+    parameter FREQ_D1 = 170;  // D1 频率 (294 Hz)
+    parameter FREQ_E1 = 152;  // E1 频率 (330 Hz)
+    parameter FREQ_F1 = 143;  // F1 频率 (349 Hz)
+    parameter FREQ_G1 = 128;  // G1 频率 (392 Hz)
+    parameter FREQ_A1 = 114;  // A1 频率 (440 Hz)
+    parameter FREQ_B1 = 101;  // B1 频率 (494 Hz)
+    parameter FREQ_C2 = 96;   // C2 频率 (523 Hz)
+    reg [6:0] temp;
+    reg [3:0] s_g, s, m_g, m, h_g, h; // 用于存储当前时间的寄存器
+    reg [3:0] set_s_g, set_s, set_m_g, set_m, set_h_g, set_h; // 用于设置闹钟的寄存器
+    reg [2:0] set_pos; // 设置位置寄存器
+    reg sparkle;
+    always@(posedge sing_clk)begin
+	if((h_g==set_h_g&&h==set_h&&m_g==set_m_g&&m==set_m&&s==set_s&&set_time_button)||(m==4'b0000&&m_g==4'b0000))begin
+	              if (temp == FREQ_C2-1) begin // 若计数器加到了模
+                    speaker <= ~speaker; // 反转输出信号
+                    temp<= 0; // 计数器置零
+                end else 
+                    temp = temp + 1; // 否则计数器加1
+        end
+        else
+        speaker<=1'b0;
+        end
+    always @(posedge clk or negedge clr) begin//在时钟沿上升沿触发
+        if(!clr) begin//若置零标志为1
+            if(!alarm_switch) begin//若置零标志为0且闹钟模式为0
+                h_g<=4'b0000;//小时的个位置零
+                h<=4'b0000;//小时的十位置零
+                m_g<=4'b0000;//分钟的个位置零
+                m<=4'b0000;//分钟的十位置零
+                s_g<=4'b0000;//秒的个位置零
+                s<=4'b0000;//秒的十位置零
+            end
+            else if(alarm_switch) begin//若置零标志为0且闹钟模式为1
+                set_h_g<=4'b0000;//小时的个位置零
+                set_h<=4'b0000;//小时的十位置零
+                set_m_g<=4'b0000;//分钟的个位置零
+                set_m<=4'b0000;//分钟的十位置零
+                set_s_g<=4'b0000;//秒的个位置零
+                set_s<=4'b0000;//秒的十位置零
+                set_pos<=3'b000;//设置位置寄存器清零
+            end
+        end
+        else begin//若置零标志为1且闹钟模式为0
+            if(s_g==4'b1001 && s==4'b0101) begin//若当前秒数为59
+                s_g<=4'b0000;//秒的个位置零
+                s<=4'b0000;//秒的十位置零
+                if(m_g==4'b1001 && m==4'b0101) begin//若当前分钟数为59
+                    m_g<=4'b0000;//分钟的个位置零
+                    m<=4'b0000;//分钟的十位置零
+                    if(h_g==4'b0011 && h==4'b0010) begin//若当前小时数为23
+                        h_g<=4'b0000;//小时的个位置零
+                        h<=4'b0000;//小时的十位置零
+                    end
+                    else begin
+                        if(h_g==4'b1001) begin//若当前小时数为9
+                            h_g<=4'b0000;//小时的个位置零
+                            h<=h+1;//小时的十位加一
+                        end
+                        else begin//正常情况
+                            h_g<=h_g+1;//小时的个位置加一
+                            h<=h;//小时的十位不变
+                        end
+                    end
+                end
+                else begin//正常情况
+                    if(m_g==4'b1001) begin//若当前分钟数为9
+                        m_g<=4'b0000;//分钟的个位置零
+                        m<=m+1;//分钟的十位加一
+                    end
+                    else begin//正常情况
+                        m_g<=m_g+1;//分钟的个位置加一
+                        m<=m;//分钟的十位不变
+                    end
+                end
+            end
+            else if(s_g==4'b1001) begin//若个位的数为9
+                s_g<=4'b0000;//个位置零
+                s<=s+1;//十位加一
+            end
+            else begin//若为正常情况
+                s_g<=s_g+1;//个位加一
+                s<=s;//十位不变
+            end
+            sparkle<=~sparkle;
+            if(alarm_switch) begin
+                if(change_button) begin//若切换下一个显示按钮
+                    set_pos<=set_pos+1;//设置位置加一
+                    if(set_pos==3'b110)
+                        set_pos<=3'b000;//若设置位置为6则清零
+                end
+                if(set_button) begin//若设置按钮按下
+                    case(set_pos)
+                        3'b000: begin
+                            if(set_s_g==4'b1001)//若秒的个位为9则清零
+                                set_s_g<=4'b0000;//个位清零
+                            else
+                            set_s_g<=set_s_g+1;//秒的个位加一
+                        end
+                        3'b001: begin
+                            if(set_s==4'b0101)//若秒的十位为5则清零
+                                set_s<=4'b0000;//十位清零
+                            else
+                            set_s<=set_s+1;//秒的十位加一
+                        end
+                        3'b010: begin
+                            if(set_m_g==4'b1001)//若分钟的个位为9则清零
+                                set_m_g<=4'b0000;//个位清零
+                            else
+                              set_m_g<=set_m_g+1;//分钟的个位加一
+                        end
+                        3'b011: begin
+                            if(set_m==4'b0101)//若分钟的十位为5则清零
+                                set_m<=4'b0000;//十位清零
+                            else
+                            set_m<=set_m+1;//分钟的十位加一
+                        end
+                        3'b100: begin
+                            if(set_h_g==4'b0011)//若小时的个位为3则清零
+                                set_h_g<=4'b0000;//个位清零
+                            else
+                            set_h_g<=set_h_g+1;//分钟的十位加一
+                        end
+                        3'b101: begin
+                            if(set_h==4'b0010)//若小时的十位为2则清零
+                                set_h<=4'b0000;//十位清零
+                            else
+                            set_h<=set_h+1;//小时的十位加一
+                        end
+                    endcase
+                end
+                if(set_time_button)begin
+				h_g<=set_h_g;//小时的个位置零
+                h<=set_h;//小时的十位置零
+                m_g<=set_m_g;//分钟的个位置零
+                m<=set_m;//分钟的十位置零
+                s_g<=set_s_g;//秒的个位置零
+                s<=set_s;//秒的十位置零
+            end
+
+
+            end
+        end
+        end
+         assign   r_s_g= (alarm_switch) ? ((sparkle && set_pos==3'b000) ? turn_led(4'b1111) :turn_led(set_s_g) ) : turn_led(s_g);//秒的个位数显示
+         assign   r_s= (alarm_switch) ? ((sparkle && set_pos==3'b001) ? 4'b1111 : set_s) : s;//秒的十位数显示
+         assign   r_m_g= (alarm_switch) ? ((sparkle && set_pos==3'b010) ? 4'b1111 :set_m_g ): m_g;//分钟的个位数显示
+         assign   r_m=(alarm_switch) ?((sparkle && set_pos==3'b011) ? 4'b1111 : set_m ) : m;//分钟的十位数显示
+         assign   r_h_g= (alarm_switch) ?((sparkle && set_pos==3'b100) ? 4'b1111 :set_h_g ): h_g;//小时的个位数显示
+         assign   r_h=(alarm_switch) ?((sparkle && set_pos==3'b101) ? 4'b1111 : set_h) : h;//小时的十位数显示
+    function[0:6] turn_led;
+        input [3:0] g;
+        begin
+            case(g)
+                4'b0000:
+                    turn_led=7'b1111110;
+                4'b0001:
+                    turn_led=7'b0110000;
+                4'b0010:
+                    turn_led=7'b1101101;
+                4'b0011:
+                    turn_led=7'b1111001;
+                4'b0100:
+                    turn_led=7'b0110011;
+                4'b0101:
+                    turn_led=7'b1011011;
+                4'b0110:
+                    turn_led=7'b0011111;
+                4'b0111:
+                    turn_led=7'b1110000;
+                4'b1000:
+                    turn_led=7'b1111111;
+                4'b1001:
+                    turn_led=7'b1110011;
+                default:
+                    turn_led=7'b0000000;
+            endcase
+        end
+    endfunction
+endmodule

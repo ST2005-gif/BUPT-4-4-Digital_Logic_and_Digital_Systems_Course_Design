@@ -1,0 +1,9 @@
+Fitter Status : Successful - Tue Jan 01 02:05:01 2013
+Quartus II Version : 9.1 Build 222 10/21/2009 SJ Full Version
+Revision Name : new_job
+Top-level Entity Name : new_job
+Family : MAX7000S
+Device : EPM7128SLC84-15
+Timing Models : Final
+Total macrocells : 99 / 128 ( 77 % )
+Total pins : 41 / 68 ( 60 % )

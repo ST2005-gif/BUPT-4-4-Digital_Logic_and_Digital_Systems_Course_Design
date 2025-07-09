@@ -1,0 +1,358 @@
+module new_job (
+    input  wire        clk,
+    input  wire        rst_n,
+    input  wire        mode_control_one,
+    input  wire        mode_control_two,
+    input  wire [6:0]  set_pills_per_bottle,
+    input  wire [4:0]  set_total_bottles,
+    // BCD outputs: two digits each (8421 BCD)
+    output reg [7:0]   bottle_count_bcd,
+    output reg [7:0]   pill_count_bcd,
+    output reg [2:0]   current
+);
+
+localparam SPACE    = 3'b000;
+localparam SETTING  = 3'b001;
+localparam CLEARING = 3'b010;
+localparam WORKING  = 3'b011;
+localparam ERROR    = 3'b100;
+
+reg [2:0]  current_state, next_state;
+reg [7:0]  pills_per_bottle;
+reg [7:0]  total_bottle;
+// Internal binary counters
+reg [5:0]  bottle_count_bin;
+reg [6:0]  pill_count_bin;
+reg [1:0]  mode_control;
+
+// State register
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current_state <= SPACE;
+    else
+        current_state <= next_state;
+end
+
+// State output
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current <= SPACE;
+    else
+        current <= current_state;
+end
+
+// Next-state logic
+always @(*) begin
+    mode_control = {mode_control_two, mode_control_one};
+    case (current_state)
+        SPACE: begin
+            case (mode_control)
+                2'b01: next_state = (set_pills_per_bottle == 0 || set_total_bottles == 0) ? ERROR : SETTING;
+                2'b10: next_state = CLEARING;
+                2'b11: next_state = WORKING;
+                default: next_state = SPACE;
+            endcase
+        end
+        SETTING: next_state = SPACE;
+        CLEARING: next_state = SPACE;
+        WORKING: next_state = SPACE;
+        ERROR: next_state = SPACE;
+        default: next_state = SPACE;
+    endcase
+end
+
+// Data and counter updates
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        pills_per_bottle <= 8'd0;
+        total_bottle    <= 8'd0;
+        bottle_count_bin <= 6'd0;
+        pill_count_bin   <= 7'd0;
+    end else begin
+        case (current_state)
+            SETTING: begin
+                pills_per_bottle <= {1'b0, set_pills_per_bottle};  // zero-extend to 8 bits
+                total_bottle    <= {3'b0, set_total_bottles};
+            end
+            CLEARING: begin
+                bottle_count_bin <= 6'd0;
+                pill_count_bin   <= 7'd0;
+            end
+            WORKING: begin
+                if (bottle_count_bin < total_bottle) begin
+                    if (pill_count_bin < (pills_per_bottle - 1)) begin
+                        pill_count_bin <= pill_count_bin + 1;
+                    end else begin
+                        pill_count_bin <= 7'd0;
+                        bottle_count_bin <= bottle_count_bin + 1;
+                    end
+                end
+            end
+            ERROR: begin
+                bottle_count_bin <= 6'd0;
+                pill_count_bin   <= 7'd0;
+            end
+            default: begin
+                // do nothing
+            end
+        endcase
+    end
+end
+
+// BCD Conversion (two-digit 8421)
+always @(*) begin
+    // Bottle count BCD
+    bottle_count_bcd[7:4] = bottle_count_bin / 6'd10;  // tens digit
+    bottle_count_bcd[3:0] = bottle_count_bin % 6'd10;  // units digit
+    // Pill count BCD
+    pill_count_bcd[7:4]   = pill_count_bin   / 7'd10;
+    pill_count_bcd[3:0]   = pill_count_bin   % 7'd10;
+end
+
+endmodule
+
+
+
+
+
+
+module new_job (
+    input  wire        clk,
+    input  wire        rst_n,
+    input  wire        mode_control_one,
+    input  wire        mode_control_two,
+    input  wire [6:0]  set_pills_per_bottle,
+    input  wire [4:0]  set_total_bottles,
+    // BCD outputs: two digits each (8421 BCD)
+    output reg [7:0]   bottle_count_bcd,
+    output reg [7:0]   pill_count_bcd,
+    output reg [2:0]   current
+);
+
+localparam SPACE    = 3'b000;
+localparam SETTING  = 3'b001;
+localparam CLEARING = 3'b010;
+localparam WORKING  = 3'b011;
+localparam ERROR    = 3'b100;
+
+reg [2:0]  current_state, next_state;
+reg [7:0]  pills_per_bottle;
+reg [7:0]  total_bottle;
+// Internal binary counters
+reg [5:0]  bottle_count_bin;
+reg [6:0]  pill_count_bin;
+reg [1:0]  mode_control;
+
+// Shift registers for BCD conversion
+reg [13:0] shift_reg;
+integer    i;
+
+// State register
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current_state <= SPACE;
+    else
+        current_state <= next_state;
+end
+
+// State output
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current <= SPACE;
+    else
+        current <= current_state;
+end
+
+// Next-state logic
+always @(*) begin
+    mode_control = {mode_control_two, mode_control_one};
+    case (current_state)
+        SPACE: begin
+            case (mode_control)
+                2'b01: next_state = (set_pills_per_bottle == 0 || set_total_bottles == 0) ? ERROR : SETTING;
+                2'b10: next_state = CLEARING;
+                2'b11: next_state = WORKING;
+                default: next_state = SPACE;
+            endcase
+        end
+        SETTING: next_state = SPACE;
+        CLEARING: next_state = SPACE;
+        WORKING: next_state = SPACE;
+        ERROR: next_state = SPACE;
+        default: next_state = SPACE;
+    endcase
+end
+
+// Data and counter updates
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        pills_per_bottle  <= 8'd0;
+        total_bottle      <= 8'd0;
+        bottle_count_bin  <= 6'd0;
+        pill_count_bin    <= 7'd0;
+    end else begin
+        case (current_state)
+            SETTING: begin
+                pills_per_bottle <= {1'b0, set_pills_per_bottle};  // zero-extend
+                total_bottle     <= {3'b0, set_total_bottles};
+            end
+            CLEARING: begin
+                bottle_count_bin <= 6'd0;
+                pill_count_bin   <= 7'd0;
+            end
+            WORKING: begin
+                if (bottle_count_bin < total_bottle) begin
+                    if (pill_count_bin < (pills_per_bottle - 1)) begin
+                        pill_count_bin <= pill_count_bin + 1;
+                    end else begin
+                        pill_count_bin   <= 7'd0;
+                        bottle_count_bin <= bottle_count_bin + 1;
+                    end
+                end
+            end
+            ERROR: begin
+                bottle_count_bin <= 6'd0;
+                pill_count_bin   <= 7'd0;
+            end
+            default: ;
+        endcase
+    end
+end
+
+// BCD Conversion (Double Dabble, no / or %)
+always @(*) begin
+    // Bottle count conversion
+    shift_reg = {8'd0, bottle_count_bin}; // {tens, units, binary}
+    for (i = 0; i < 6; i = i + 1) begin
+        if (shift_reg[13:10] >= 5) shift_reg[13:10] = shift_reg[13:10] + 3;
+        if (shift_reg[9:6]  >= 5) shift_reg[9:6]  = shift_reg[9:6]  + 3;
+        shift_reg = shift_reg << 1;
+    end
+    bottle_count_bcd[7:4] = shift_reg[13:10];
+    bottle_count_bcd[3:0] = shift_reg[9:6];
+
+    // Pill count conversion
+    shift_reg = {7'd0, pill_count_bin};
+    for (i = 0; i < 7; i = i + 1) begin
+        if (shift_reg[13:10] >= 5) shift_reg[13:10] = shift_reg[13:10] + 3;
+        if (shift_reg[9:6]  >= 5) shift_reg[9:6]  = shift_reg[9:6]  + 3;
+        shift_reg = shift_reg << 1;
+    end
+    pill_count_bcd[7:4] = shift_reg[13:10];
+    pill_count_bcd[3:0] = shift_reg[9:6];
+end
+
+endmodule
+
+
+module new_job (
+    input  wire        clk,
+    input  wire        rst_n,
+    input  wire        mode_control_one,
+    input  wire        mode_control_two,
+    input  wire [6:0]  set_pills_per_bottle,
+    input  wire [4:0]  set_total_bottles,
+    output reg [7:0]   bottle_count_bcd,
+    output reg [7:0]   pill_count_bcd,
+    output reg [2:0]   current
+);
+
+localparam SPACE    = 3'b000;
+localparam SETTING  = 3'b001;
+localparam CLEARING = 3'b010;
+localparam WORKING  = 3'b011;
+
+reg [2:0]  current_state, next_state;
+reg [6:0]  pills_per_bottle;
+reg [4:0]  total_bottle;
+reg [5:0]  bottle_count_bin;
+reg [6:0]  pill_count_bin;
+reg [1:0]  mode_control;
+
+reg [11:0] shift_reg;
+integer i;
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current_state <= SPACE;
+    else
+        current_state <= next_state;
+end
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current <= SPACE;
+    else
+        current <= current_state;
+end
+
+always @(*) begin
+    mode_control = {mode_control_two, mode_control_one};
+    case (current_state)
+        SPACE: begin
+            case (mode_control)
+                2'b01: next_state = SETTING;
+                2'b10: next_state = CLEARING;
+                2'b11: next_state = WORKING;
+                default: next_state = SPACE;
+            endcase
+        end
+        SETTING, CLEARING, WORKING: next_state = SPACE;
+        default: next_state = SPACE;
+    endcase
+end
+
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        pills_per_bottle  <= 7'd0;
+        total_bottle      <= 5'd0;
+        bottle_count_bin  <= 6'd0;
+        pill_count_bin    <= 7'd0;
+    end else begin
+        case (current_state)
+            SETTING: begin
+                pills_per_bottle <= set_pills_per_bottle;
+                total_bottle     <= set_total_bottles;
+            end
+            CLEARING: begin
+                bottle_count_bin <= 6'd0;
+                pill_count_bin   <= 7'd0;
+            end
+            WORKING: begin
+                if (bottle_count_bin < total_bottle) begin
+                    if (pill_count_bin < (pills_per_bottle - 1)) begin
+                        pill_count_bin <= pill_count_bin + 1;
+                    end else begin
+                        pill_count_bin   <= 7'd0;
+                        bottle_count_bin <= bottle_count_bin + 1;
+                    end
+                end
+            end
+            default: ;
+        endcase
+    end
+end
+
+// BCD conversion for bottle count
+always @(*) begin
+    shift_reg = {4'd0, bottle_count_bin};
+    for (i = 0; i < 6; i = i + 1) begin
+        if (shift_reg[11:8] >= 5) shift_reg[11:8] = shift_reg[11:8] + 3;
+        if (shift_reg[7:4] >= 5)  shift_reg[7:4]  = shift_reg[7:4]  + 3;
+        shift_reg = shift_reg << 1;
+    end
+    bottle_count_bcd[7:4] = shift_reg[11:8];
+    bottle_count_bcd[3:0] = shift_reg[7:4];
+
+    shift_reg = {5'd0, pill_count_bin};
+    for (i = 0; i < 7; i = i + 1) begin
+        if (shift_reg[11:8] >= 5) shift_reg[11:8] = shift_reg[11:8] + 3;
+        if (shift_reg[7:4] >= 5)  shift_reg[7:4]  = shift_reg[7:4]  + 3;
+        shift_reg = shift_reg << 1;
+    end
+    pill_count_bcd[7:4] = shift_reg[11:8];
+    pill_count_bcd[3:0] = shift_reg[7:4];
+end
+
+endmodule
+

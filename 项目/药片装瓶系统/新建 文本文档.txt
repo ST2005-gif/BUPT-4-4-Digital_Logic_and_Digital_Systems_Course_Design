@@ -1,0 +1,534 @@
+﻿module new_job (
+    input wire clk,
+    input wire rst_n,
+    input wire mode_control_one,
+    input wire mode_control_two,
+    input wire [7:0] set_pills_per_bottle, // 支持最大 99
+    input wire [7:0] set_total_bottles,    // 支持最大 99
+    output reg [7:0] bottle_count,         // 已完成瓶子数量
+    output reg [7:0] pill_count,           // 当前瓶中药丸数量
+    output reg [2:0] current               // 当前状态：改为3位，支持多于4种状态
+);
+
+localparam SPACE    = 3'b000;
+localparam SETTING  = 3'b001;
+localparam CLEARING = 3'b010;
+localparam WORKING  = 3'b011;
+localparam ERROR    = 3'b100;
+
+reg [2:0] current_state, next_state;
+reg [7:0] pills_per_bottle, total_bottle;
+reg [1:0] mode_control;
+
+// 状态转移逻辑
+always @(*) begin
+    mode_control = {mode_control_two, mode_control_one};
+
+    case (mode_control)
+        2'b00: next_state = SPACE;
+        2'b01: next_state = SETTING;
+        2'b10: next_state = CLEARING;
+        2'b11: next_state = WORKING;
+        default: next_state = SPACE;
+    endcase
+end
+
+// 状态寄存器（规范写法）
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current_state <= SPACE;
+    else
+        current_state <= next_state;
+end
+
+// 功能实现逻辑
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        pills_per_bottle <= 8'd0;
+        total_bottle <= 8'd0;
+        bottle_count <= 8'd0;
+        pill_count <= 8'd0;
+        current <= SPACE;
+    end else begin
+        current <= current_state;
+
+        case (current_state)
+            SPACE: begin
+                // 空闲，不进行任何操作
+            end
+
+            SETTING: begin
+                // 参数设置时检查最大值限制
+                if (set_pills_per_bottle > 8'd99 || set_total_bottles > 8'd99) begin
+                    current_state <= ERROR;
+                end else begin
+                    pills_per_bottle <= set_pills_per_bottle;
+                    total_bottle <= set_total_bottles;
+                end
+            end
+
+            CLEARING: begin
+                pill_count <= 8'd0;
+                bottle_count <= 8'd0;
+            end
+
+            WORKING: begin
+                if (bottle_count < total_bottle) begin
+                    if (pill_count < pills_per_bottle) begin
+                        pill_count <= pill_count + 1;
+
+                        if (pill_count + 1 == pills_per_bottle) begin
+                            pill_count <= 8'd0;
+                            bottle_count <= bottle_count + 1;
+                        end
+                    end
+                end
+            end
+
+            ERROR: begin
+                // 错误状态可用于报警或处理
+                pill_count <= 8'd0;
+                bottle_count <= 8'd0;
+            end
+
+            default: begin
+                // 安全兜底
+                current_state <= SPACE;
+            end
+        endcase
+    end
+end
+
+endmodule
+
+Error (10028): Can't resolve multiple constant drivers for net "current_state.SPACE" at new_job.v(45)
+Error (10029): Constant driver at new_job.v(37)
+Error (10028): Can't resolve multiple constant drivers for net "current_state.SETTING" at new_job.v(45)
+Error (10028): Can't resolve multiple constant drivers for net "current_state.CLEARING" at new_job.v(45)
+Error (10028): Can't resolve multiple constant drivers for net "current_state.WORKING" at new_job.v(45)
+Error (10028): Can't resolve multiple constant drivers for net "current_state.ERROR" at new_job.v(45)
+Info (10018): Can't recognize finite state machine "current_state" because it has a complex reset state
+Error: Can't elaborate top-level user hierarchy
+Error: Quartus II Analysis & Synthesis was unsuccessful. 7 errors, 2 warnings
+	Error: Peak virtual memory: 190 megabytes
+	Error: Processing ended: Tue Jan 01 01:01:02 2013
+	Error: Elapsed time: 00:00:00
+	Error: Total CPU time (on all processors): 00:00:00
+Error: Quartus II Full Compilation was unsuccessful. 9 errors, 2 warnings
+
+module new_job (
+    input wire clk,
+    input wire rst_n,
+    input wire mode_control_one,
+    input wire mode_control_two,
+    input wire [7:0] set_pills_per_bottle,
+    input wire [3:0] set_total_bottles,
+    output reg [3:0] bottle_count,
+    output reg [7:0] pill_count,
+    output reg [2:0] current
+);
+
+localparam SPACE    = 3'b000;
+localparam SETTING  = 3'b001;
+localparam CLEARING = 3'b010;
+localparam WORKING  = 3'b011;
+localparam ERROR    = 3'b100;
+
+reg [2:0] current_state, next_state;
+reg [7:0] pills_per_bottle, total_bottle;
+reg [1:0] mode_control;
+
+// 状态寄存器（只在时钟沿更新 current_state）
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current_state <= SPACE;
+    else
+        current_state <= next_state;
+end
+
+// 状态输出（也可以不写，用 current_state 直接赋给 current）
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current <= SPACE;
+    else
+        current <= current_state;
+end
+
+// 状态转移逻辑
+always @(*) begin
+    mode_control = {mode_control_two, mode_control_one};
+
+    case (mode_control)
+        2'b00: next_state = SPACE;
+        2'b01: begin
+            // 如果设置非法，进入错误状态
+            if (set_pills_per_bottle > 8'd99 || set_total_bottles > 8'd99)
+                next_state = ERROR;
+            else
+                next_state = SETTING;
+        end
+        2'b10: next_state = CLEARING;
+        2'b11: next_state = WORKING;
+        default: next_state = SPACE;
+    endcase
+end
+
+// 输出/数据更新逻辑
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        pills_per_bottle <= 8'd0;
+        total_bottle <= 8'd0;
+        bottle_count <= 8'd0;
+        pill_count <= 8'd0;
+    end else begin
+        case (current_state)
+            SETTING: begin
+                pills_per_bottle <= set_pills_per_bottle;
+                total_bottle <= set_total_bottles;
+            end
+
+            CLEARING: begin
+                pill_count <= 8'd0;
+                bottle_count <= 8'd0;
+            end
+
+            WORKING: begin
+                if (bottle_count < total_bottle) begin
+                    if (pill_count < pills_per_bottle - 1) begin
+                        pill_count <= pill_count + 1;
+                    end else begin
+                        pill_count <= 8'd0;
+                        bottle_count <= bottle_count + 1;
+                    end
+                end
+            end
+
+            ERROR: begin
+                // 错误状态处理（可添加LED或输出信号等）
+                pill_count <= 8'd0;
+                bottle_count <= 8'd0;
+            end
+
+            default: begin
+                // Do nothing
+            end
+        endcase
+    end
+end
+
+endmodule
+
+
+
+
+module new_job (
+    input wire clk,
+    input wire rst_n,
+    input wire mode_control_one,
+    input wire mode_control_two,
+    input wire input_select,             // 新增：输入选择（0=药片数，1=瓶数）
+    input wire [7:0] data_input,         // 用于输入 set_pills_per_bottle 或 set_total_bottles
+    output reg [7:0] bottle_count,
+    output reg [7:0] pill_count,
+    output reg [2:0] current
+);
+
+localparam SPACE    = 3'b000;
+localparam SETTING  = 3'b001;
+localparam CLEARING = 3'b010;
+localparam WORKING  = 3'b011;
+localparam ERROR    = 3'b100;
+
+reg [2:0] current_state, next_state;
+reg [7:0] pills_per_bottle, total_bottle;
+reg [1:0] mode_control;
+
+// 状态寄存器
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current_state <= SPACE;
+    else
+        current_state <= next_state;
+end
+
+// 状态输出
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current <= SPACE;
+    else
+        current <= current_state;
+end
+
+// 状态转移逻辑
+always @(*) begin
+    mode_control = {mode_control_two, mode_control_one};
+
+    case (mode_control)
+        2'b00: next_state = SPACE;
+        2'b01: begin
+            // 检查当前值是否合法（都来自 data_input，所以需要读取两个值完成设置）
+            if (pills_per_bottle > 8'd99 || total_bottle > 8'd99)
+                next_state = ERROR;
+            else
+                next_state = SETTING;
+        end
+        2'b10: next_state = CLEARING;
+        2'b11: next_state = WORKING;
+        default: next_state = SPACE;
+    endcase
+end
+
+// 数据更新逻辑
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        pills_per_bottle <= 8'd0;
+        total_bottle <= 8'd0;
+        bottle_count <= 8'd0;
+        pill_count <= 8'd0;
+    end else begin
+        case (current_state)
+            SETTING: begin
+                if (input_select == 1'b0)
+                    pills_per_bottle <= data_input;
+                else
+                    total_bottle <= data_input;
+            end
+
+            CLEARING: begin
+                pill_count <= 8'd0;
+                bottle_count <= 8'd0;
+            end
+
+            WORKING: begin
+                if (bottle_count < total_bottle) begin
+                    if (pill_count < pills_per_bottle - 1) begin
+                        pill_count <= pill_count + 1;
+                    end else begin
+                        pill_count <= 8'd0;
+                        bottle_count <= bottle_count + 1;
+                    end
+                end
+            end
+
+            ERROR: begin
+                pill_count <= 8'd0;
+                bottle_count <= 8'd0;
+            end
+
+            default: begin
+                // Do nothing
+            end
+        endcase
+    end
+end
+
+endmodule
+
+
+
+
+
+
+
+
+
+module new_job (
+    input wire clk,
+    input wire rst_n,
+    input wire mode_control_one,
+    input wire mode_control_two,
+    input wire [6:0] set_pills_per_bottle,
+    input wire [4:0] set_total_bottles,
+    output reg [5:0] bottle_count,
+    output reg [6:0] pill_count,
+    output reg [2:0] current
+);
+
+localparam SPACE    = 3'b000;
+localparam SETTING  = 3'b001;
+localparam CLEARING = 3'b010;
+localparam WORKING  = 3'b011;
+localparam ERROR    = 3'b100;
+
+reg [2:0] current_state, next_state;
+reg [7:0] pills_per_bottle, total_bottle;
+reg [1:0] mode_control;
+
+// 状态寄存器（只在时钟沿更新 current_state）
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current_state <= SPACE;
+    else
+        current_state <= next_state;
+end
+
+// 状态输出（也可以不写，用 current_state 直接赋给 current）
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+        current <= SPACE;
+    else
+        current <= current_state;
+end
+
+// 状态转移逻辑
+always @(*) begin
+    mode_control = {mode_control_two, mode_control_one};
+
+    case (mode_control)
+        2'b00: next_state = SPACE;
+        2'b01: begin
+            // 如果设置非法，进入错误状态
+            if (set_pills_per_bottle > 8'd99 || set_total_bottles > 8'd99)
+                next_state = ERROR;
+            else
+                next_state = SETTING;
+        end
+        2'b10: next_state = CLEARING;
+        2'b11: next_state = WORKING;
+        default: next_state = SPACE;
+    endcase
+end
+
+// 输出/数据更新逻辑
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        pills_per_bottle <= 8'd0;
+        total_bottle <= 8'd0;
+        bottle_count <= 8'd0;
+        pill_count <= 8'd0;
+    end else begin
+        case (current_state)
+            SETTING: begin
+                pills_per_bottle <= set_pills_per_bottle;
+                total_bottle <= set_total_bottles;
+            end
+
+            CLEARING: begin
+                pill_count <= 8'd0;
+                bottle_count <= 8'd0;
+            end
+
+            WORKING: begin
+                if (bottle_count < total_bottle) begin
+                    if (pill_count < pills_per_bottle - 1) begin
+                        pill_count <= pill_count + 1;
+                    end else begin
+                        pill_count <= 8'd0;
+                        bottle_count <= bottle_count + 1;
+                    end
+                end
+            end
+
+            ERROR: begin
+                // 错误状态处理（可添加LED或输出信号等）
+                pill_count <= 8'd0;
+                bottle_count <= 8'd0;
+            end
+
+            default: begin
+                // Do nothing
+            end
+        endcase
+    end
+end
+
+endmodule
+
+
+
+
+
+module new_job (
+    input  wire        clk,
+    input  wire        rst_n,
+    input  wire        mode_control_one,
+    input  wire        mode_control_two,
+    input  wire [6:0]  set_pills_per_bottle,
+    input  wire [4:0]  set_total_bottles,
+    output reg  [7:0]  bottle_count_bcd, // {tens, ones}
+    output reg  [7:0]  pill_count_bcd,   // {tens, ones}
+    output reg  [1:0]  current           // 00=SPACE, 01=SETTING, 10=CLEARING, 11=WORKING
+);
+
+localparam SPACE    = 2'b00;
+localparam SETTING  = 2'b01;
+localparam CLEARING = 2'b10;
+localparam WORKING  = 2'b11;
+
+reg [1:0] current_state, next_state;
+reg [3:0] pill_ones, pill_tens;
+reg [3:0] bottle_ones, bottle_tens;
+
+// 当前 BCD 拼接值（×10 = <<3 + <<1）
+wire [6:0] current_pill_count   = (pill_tens << 3) + (pill_tens << 1) + pill_ones;
+wire [5:0] current_bottle_count = (bottle_tens << 3) + (bottle_tens << 1) + bottle_ones;
+
+// 状态寄存器
+always @(posedge clk or negedge rst_n)
+    if (!rst_n) current_state <= SPACE;
+    else        current_state <= next_state;
+
+// 状态输出
+always @(posedge clk or negedge rst_n)
+    if (!rst_n) current <= SPACE;
+    else        current <= current_state;
+
+// 状态转移逻辑
+always @(*) begin
+    case ({mode_control_two, mode_control_one})
+        2'b01: next_state = SETTING;
+        2'b10: next_state = CLEARING;
+        2'b11: next_state = WORKING;
+        default: next_state = SPACE;
+    endcase
+end
+
+// 主功能逻辑
+always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+        pill_ones    <= 0;
+        pill_tens    <= 0;
+        bottle_ones  <= 0;
+        bottle_tens  <= 0;
+    end else begin
+        case (current_state)
+            CLEARING: begin
+                pill_ones    <= 0;
+                pill_tens    <= 0;
+                bottle_ones  <= 0;
+                bottle_tens  <= 0;
+            end
+
+            WORKING: begin
+                if (current_bottle_count < set_total_bottles && set_pills_per_bottle > 0) begin
+                    if (current_pill_count < set_pills_per_bottle - 1) begin
+                        if (pill_ones == 9) begin
+                            pill_ones <= 0;
+                            pill_tens <= pill_tens + 1;
+                        end else begin
+                            pill_ones <= pill_ones + 1;
+                        end
+                    end else begin
+                        pill_ones <= 0;
+                        pill_tens <= 0;
+                        if (bottle_ones == 9) begin
+                            bottle_ones <= 0;
+                            bottle_tens <= bottle_tens + 1;
+                        end else begin
+                            bottle_ones <= bottle_ones + 1;
+                        end
+                    end
+                end
+            end
+        endcase
+    end
+end
+
+// BCD 输出拼接
+always @(*) begin
+    pill_count_bcd   = {pill_tens, pill_ones};
+    bottle_count_bcd = {bottle_tens, bottle_ones};
+end
+
+endmodule
+

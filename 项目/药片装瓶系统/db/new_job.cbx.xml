@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="new_job">
+		<CBX_INST_ENTRY INSTANCE_NAME="|new_job|lpm_add_sub:Add10" CBX_FILE_NAME="add_sub_qnh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|new_job|lpm_add_sub:Add5" CBX_FILE_NAME="add_sub_1dh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|new_job|lpm_add_sub:Add2" CBX_FILE_NAME="add_sub_5kh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|new_job|lpm_add_sub:Add4" CBX_FILE_NAME="add_sub_4kh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|new_job|lpm_add_sub:Add6" CBX_FILE_NAME="add_sub_3kh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|new_job|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_3kh.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

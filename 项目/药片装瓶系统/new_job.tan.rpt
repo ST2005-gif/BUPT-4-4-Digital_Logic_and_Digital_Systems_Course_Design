@@ -1,0 +1,894 @@
+Classic Timing Analyzer report for new_job
+Tue Jan 01 02:05:03 2013
+Quartus II Version 9.1 Build 222 10/21/2009 SJ Full Version
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Parallel Compilation
+  6. Clock Setup: 'clk'
+  7. tsu
+  8. tco
+  9. tpd
+ 10. th
+ 11. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                              ;
++------------------------------+-------+---------------+----------------------------------+-------------------------+---------------------------+------------+----------+--------------+
+; Type                         ; Slack ; Required Time ; Actual Time                      ; From                    ; To                        ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+-------+---------------+----------------------------------+-------------------------+---------------------------+------------+----------+--------------+
+; Worst-case tsu               ; N/A   ; None          ; 48.000 ns                        ; set_pills_per_bottle[1] ; pill_ones[1]              ; --         ; clk      ; 0            ;
+; Worst-case tco               ; N/A   ; None          ; 24.000 ns                        ; error_flag              ; pill_count_bcd[0]         ; clk        ; --       ; 0            ;
+; Worst-case tpd               ; N/A   ; None          ; 15.000 ns                        ; clk                     ; pill_count_bcd[0]         ; --         ; --       ; 0            ;
+; Worst-case th                ; N/A   ; None          ; 4.000 ns                         ; mode_control_two        ; current_state.state_bit_1 ; --         ; clk      ; 0            ;
+; Clock Setup: 'clk'           ; N/A   ; None          ; 17.24 MHz ( period = 58.000 ns ) ; pill_ones[1]            ; pill_ones[1]              ; clk        ; clk      ; 0            ;
+; Total number of failed paths ;       ;               ;                                  ;                         ;                           ;            ;          ; 0            ;
++------------------------------+-------+---------------+----------------------------------+-------------------------+---------------------------+------------+----------+--------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                                                                            ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+; Option                                                                                               ; Setting            ; From ; To ; Entity Name ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+; Device Name                                                                                          ; EPM7128SLC84-15    ;      ;    ;             ;
+; Timing Models                                                                                        ; Final              ;      ;    ;             ;
+; Default hold multicycle                                                                              ; Same as Multicycle ;      ;    ;             ;
+; Cut paths between unrelated clock domains                                                            ; On                 ;      ;    ;             ;
+; Cut off read during write signal paths                                                               ; On                 ;      ;    ;             ;
+; Cut off feedback from I/O pins                                                                       ; On                 ;      ;    ;             ;
+; Report Combined Fast/Slow Timing                                                                     ; Off                ;      ;    ;             ;
+; Ignore Clock Settings                                                                                ; Off                ;      ;    ;             ;
+; Analyze latches as synchronous elements                                                              ; On                 ;      ;    ;             ;
+; Enable Recovery/Removal analysis                                                                     ; Off                ;      ;    ;             ;
+; Enable Clock Latency                                                                                 ; Off                ;      ;    ;             ;
+; Use TimeQuest Timing Analyzer                                                                        ; Off                ;      ;    ;             ;
+; Number of source nodes to report per destination node                                                ; 10                 ;      ;    ;             ;
+; Number of destination nodes to report                                                                ; 10                 ;      ;    ;             ;
+; Number of paths to report                                                                            ; 200                ;      ;    ;             ;
+; Report Minimum Timing Checks                                                                         ; Off                ;      ;    ;             ;
+; Use Fast Timing Models                                                                               ; Off                ;      ;    ;             ;
+; Report IO Paths Separately                                                                           ; Off                ;      ;    ;             ;
+; Perform Multicorner Analysis                                                                         ; Off                ;      ;    ;             ;
+; Reports the worst-case path for each clock domain and analysis                                       ; Off                ;      ;    ;             ;
+; Reports worst-case timing paths for each clock domain and analysis                                   ; On                 ;      ;    ;             ;
+; Specifies the maximum number of worst-case timing paths to report for each clock domain and analysis ; 100                ;      ;    ;             ;
+; Removes common clock path pessimism (CCPP) during slack computation                                  ; Off                ;      ;    ;             ;
+; Output I/O Timing Endpoint                                                                           ; Near End           ;      ;    ;             ;
++------------------------------------------------------------------------------------------------------+--------------------+------+----+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                             ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type     ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset ; Phase offset ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+; clk             ;                    ; User Pin ; None             ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
++-----------------+--------------------+----------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 4           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     1 processor            ; 100.0%      ;
+;     2-4 processors         ;   0.0%      ;
++----------------------------+-------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'clk'                                                                                                                                                                                                                          ;
++-----------------------------------------+-----------------------------------------------------+----------------+----------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From           ; To             ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+----------------+----------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[2]   ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[1]   ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[0]   ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[1]   ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[2]   ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[1]   ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[0]   ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[1]   ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[2]   ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[1]   ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[0]   ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[1]   ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[2]   ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[1]   ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[0]   ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[1]   ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[2]   ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[1]   ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[0]   ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[1]   ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[2]   ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[1]   ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[0]   ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[1]   ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[2]   ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[1]   ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[0]   ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[1]   ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[2]   ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[1]   ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_tens[0]   ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.24 MHz ( period = 58.000 ns )                    ; pill_ones[1]   ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 53.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[0]   ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[1] ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[0] ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[2] ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[1] ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[3]   ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[0]   ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[1] ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[0] ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[2] ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[1] ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[3]   ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[0]   ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[1] ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[0] ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[2] ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[1] ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[3]   ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[0]   ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[1] ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[0] ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[2] ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[1] ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[3]   ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[0]   ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[1] ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[0] ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[2] ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[1] ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[3]   ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[0]   ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[1] ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[0] ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[2] ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[1] ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[3]   ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[0]   ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[1] ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[0] ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[2] ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[1] ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[3]   ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[0]   ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[1] ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_tens[0] ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[2] ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; bottle_ones[1] ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 17.54 MHz ( period = 57.000 ns )                    ; pill_ones[3]   ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 52.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[2]   ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[3]   ; pill_ones[2]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[2]   ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[3]   ; pill_tens[2]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[2]   ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[3]   ; pill_tens[1]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[2]   ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[3]   ; pill_tens[0]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[2]   ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[3]   ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[2]   ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[3]   ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[2]   ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[3]   ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[2]   ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[3]   ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_ones[2]   ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[1]   ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_tens[0]   ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 19.61 MHz ( period = 51.000 ns )                    ; pill_ones[1]   ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 46.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; pill_ones[0]   ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; pill_ones[0]   ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; pill_ones[0]   ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; pill_ones[0]   ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; bottle_tens[1] ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; bottle_tens[0] ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; bottle_ones[2] ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; bottle_ones[1] ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[0]   ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; bottle_tens[1] ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; bottle_tens[0] ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; bottle_ones[2] ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; bottle_ones[1] ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[3]   ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[2]   ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[1]   ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_tens[0]   ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.00 MHz ( period = 50.000 ns )                    ; pill_ones[1]   ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 45.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[1] ; pill_ones[0]   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[3]   ; pill_ones[0]   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[0]   ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[1] ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[0] ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[2] ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[1] ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[3]   ; bottle_tens[3] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[0]   ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[1] ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[0] ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[2] ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[1] ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[3]   ; bottle_tens[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[0]   ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[1] ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[0] ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[2] ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[1] ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[3]   ; bottle_tens[1] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[0]   ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[1] ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[0] ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[2] ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[1] ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[3]   ; bottle_tens[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[0]   ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[1] ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[0] ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[2] ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[1] ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[3]   ; bottle_ones[2] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[0]   ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[1] ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[0] ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[2] ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[1] ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[3]   ; bottle_ones[0] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[0]   ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[3]   ; bottle_ones[1] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[2] ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[3] ; bottle_ones[3] ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[2] ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[3] ; pill_tens[3]   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[2] ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[3] ; pill_ones[3]   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[2] ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[3] ; pill_ones[1]   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[0] ; done_flag      ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; pill_ones[0]   ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[1] ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_tens[0] ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[2] ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; N/A                                     ; 20.41 MHz ( period = 49.000 ns )                    ; bottle_ones[1] ; speaker~reg0   ; clk        ; clk      ; None                        ; None                      ; 44.000 ns               ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                ;                ;            ;          ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+----------------+----------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; tsu                                                                                                                                                              ;
++-----------------------------------------+-----------------------------------------------------+------------+-------------------------+----------------+----------+
+; Slack                                   ; Required tsu                                        ; Actual tsu ; From                    ; To             ; To Clock ;
++-----------------------------------------+-----------------------------------------------------+------------+-------------------------+----------------+----------+
+; N/A                                     ; None                                                ; 48.000 ns  ; set_pills_per_bottle[1] ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 48.000 ns  ; set_pills_per_bottle[1] ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 48.000 ns  ; set_pills_per_bottle[1] ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 48.000 ns  ; set_pills_per_bottle[1] ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 48.000 ns  ; set_pills_per_bottle[1] ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 48.000 ns  ; set_pills_per_bottle[1] ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 48.000 ns  ; set_pills_per_bottle[1] ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 48.000 ns  ; set_pills_per_bottle[1] ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[0] ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[0] ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[0] ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[0] ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[0] ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[0] ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[0] ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[0] ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[2] ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[2] ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[2] ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[2] ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[2] ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[2] ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[2] ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 42.000 ns  ; set_pills_per_bottle[2] ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[1] ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[3] ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[3] ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[3] ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[3] ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[3] ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[3] ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[3] ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 41.000 ns  ; set_pills_per_bottle[3] ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_total_bottles[0]    ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_total_bottles[1]    ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 40.000 ns  ; set_pills_per_bottle[1] ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[0]    ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[0]    ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[0]    ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[0]    ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[0]    ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[0]    ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[0]    ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[0]    ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[1]    ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[1]    ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[1]    ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[1]    ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[1]    ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[1]    ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[1]    ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[1]    ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[2]    ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[2]    ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[2]    ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[2]    ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[2]    ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[2]    ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[2]    ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_total_bottles[2]    ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[5] ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[5] ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[5] ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[5] ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[5] ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[5] ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[5] ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[5] ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[4] ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[4] ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[4] ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[4] ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[4] ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[4] ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[4] ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 39.000 ns  ; set_pills_per_bottle[4] ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 35.000 ns  ; set_pills_per_bottle[0] ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 35.000 ns  ; set_pills_per_bottle[2] ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[0] ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[2] ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 34.000 ns  ; set_pills_per_bottle[3] ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 33.000 ns  ; set_pills_per_bottle[3] ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_total_bottles[0]    ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_total_bottles[1]    ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_total_bottles[2]    ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_total_bottles[2]    ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[6] ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[6] ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[6] ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[6] ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[6] ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[6] ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[6] ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[6] ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[5] ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 32.000 ns  ; set_pills_per_bottle[4] ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[0]    ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[0]    ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[0]    ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[0]    ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[0]    ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[0]    ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[0]    ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[0]    ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[1]    ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[1]    ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[1]    ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[1]    ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[1]    ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[1]    ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[1]    ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[1]    ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[2]    ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[2]    ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[2]    ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[2]    ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[2]    ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[2]    ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[2]    ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_total_bottles[2]    ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[5] ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 31.000 ns  ; set_pills_per_bottle[4] ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[0]    ; error_flag     ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[1]    ; error_flag     ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[2]    ; error_flag     ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[3]    ; pill_ones[2]   ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[3]    ; pill_tens[2]   ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[3]    ; pill_tens[1]   ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[3]    ; pill_tens[0]   ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[3]    ; bottle_ones[3] ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[3]    ; pill_tens[3]   ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[3]    ; pill_ones[3]   ; clk      ;
+; N/A                                     ; None                                                ; 30.000 ns  ; set_total_bottles[3]    ; pill_ones[1]   ; clk      ;
+; N/A                                     ; None                                                ; 25.000 ns  ; set_pills_per_bottle[6] ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; bottle_ones[0] ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 24.000 ns  ; set_pills_per_bottle[6] ; speaker~reg0   ; clk      ;
+; N/A                                     ; None                                                ; 23.000 ns  ; set_total_bottles[3]    ; bottle_ones[1] ; clk      ;
+; N/A                                     ; None                                                ; 23.000 ns  ; set_total_bottles[3]    ; done_flag      ; clk      ;
+; N/A                                     ; None                                                ; 22.000 ns  ; set_total_bottles[3]    ; pill_ones[0]   ; clk      ;
+; N/A                                     ; None                                                ; 22.000 ns  ; set_total_bottles[3]    ; bottle_tens[3] ; clk      ;
+; N/A                                     ; None                                                ; 22.000 ns  ; set_total_bottles[3]    ; bottle_tens[2] ; clk      ;
+; N/A                                     ; None                                                ; 22.000 ns  ; set_total_bottles[3]    ; bottle_tens[1] ; clk      ;
+; N/A                                     ; None                                                ; 22.000 ns  ; set_total_bottles[3]    ; bottle_tens[0] ; clk      ;
+; N/A                                     ; None                                                ; 22.000 ns  ; set_total_bottles[3]    ; bottle_ones[2] ; clk      ;
+; N/A                                     ; None                                                ; 22.000 ns  ; set_total_bottles[3]    ; bottle_ones[0] ; clk      ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;            ;                         ;                ;          ;
++-----------------------------------------+-----------------------------------------------------+------------+-------------------------+----------------+----------+
+
+
++----------------------------------------------------------------------------------------+
+; tco                                                                                    ;
++-------+--------------+------------+-----------------+---------------------+------------+
+; Slack ; Required tco ; Actual tco ; From            ; To                  ; From Clock ;
++-------+--------------+------------+-----------------+---------------------+------------+
+; N/A   ; None         ; 24.000 ns  ; pill_tens[2]    ; pill_count_bcd[6]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; done_flag       ; pill_count_bcd[6]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; error_flag      ; pill_count_bcd[6]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; pill_tens[3]    ; pill_count_bcd[7]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; done_flag       ; pill_count_bcd[7]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; error_flag      ; pill_count_bcd[7]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; pill_tens[1]    ; pill_count_bcd[5]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; done_flag       ; pill_count_bcd[5]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; error_flag      ; pill_count_bcd[5]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; pill_tens[0]    ; pill_count_bcd[4]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; done_flag       ; pill_count_bcd[4]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; error_flag      ; pill_count_bcd[4]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; pill_ones[3]    ; pill_count_bcd[3]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; done_flag       ; pill_count_bcd[3]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; error_flag      ; pill_count_bcd[3]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; pill_ones[2]    ; pill_count_bcd[2]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; done_flag       ; pill_count_bcd[2]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; error_flag      ; pill_count_bcd[2]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; pill_ones[1]    ; pill_count_bcd[1]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; done_flag       ; pill_count_bcd[1]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; error_flag      ; pill_count_bcd[1]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; pill_ones[0]    ; pill_count_bcd[0]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; done_flag       ; pill_count_bcd[0]   ; clk        ;
+; N/A   ; None         ; 24.000 ns  ; error_flag      ; pill_count_bcd[0]   ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; bottle_ones[0]  ; bottle_count_bcd[0] ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; speaker~reg0    ; speaker             ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; bottle_tens[3]  ; bottle_count_bcd[7] ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; bottle_tens[2]  ; bottle_count_bcd[6] ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; bottle_tens[1]  ; bottle_count_bcd[5] ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; bottle_tens[0]  ; bottle_count_bcd[4] ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; bottle_ones[3]  ; bottle_count_bcd[3] ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; bottle_ones[2]  ; bottle_count_bcd[2] ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; bottle_ones[1]  ; bottle_count_bcd[1] ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; current[1]~reg0 ; current[1]          ; clk        ;
+; N/A   ; None         ; 15.000 ns  ; current[0]~reg0 ; current[0]          ; clk        ;
++-------+--------------+------------+-----------------+---------------------+------------+
+
+
++------------------------------------------------------------------------+
+; tpd                                                                    ;
++-------+-------------------+-----------------+------+-------------------+
+; Slack ; Required P2P Time ; Actual P2P Time ; From ; To                ;
++-------+-------------------+-----------------+------+-------------------+
+; N/A   ; None              ; 15.000 ns       ; clk  ; pill_count_bcd[6] ;
+; N/A   ; None              ; 15.000 ns       ; clk  ; pill_count_bcd[7] ;
+; N/A   ; None              ; 15.000 ns       ; clk  ; pill_count_bcd[5] ;
+; N/A   ; None              ; 15.000 ns       ; clk  ; pill_count_bcd[4] ;
+; N/A   ; None              ; 15.000 ns       ; clk  ; pill_count_bcd[3] ;
+; N/A   ; None              ; 15.000 ns       ; clk  ; pill_count_bcd[2] ;
+; N/A   ; None              ; 15.000 ns       ; clk  ; pill_count_bcd[1] ;
+; N/A   ; None              ; 15.000 ns       ; clk  ; pill_count_bcd[0] ;
++-------+-------------------+-----------------+------+-------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; th                                                                                                                                                                          ;
++-----------------------------------------+-----------------------------------------------------+------------+-------------------------+---------------------------+----------+
+; Minimum Slack                           ; Required th                                         ; Actual th  ; From                    ; To                        ; To Clock ;
++-----------------------------------------+-----------------------------------------------------+------------+-------------------------+---------------------------+----------+
+; N/A                                     ; None                                                ; 4.000 ns   ; set_total_bottles[4]    ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; 4.000 ns   ; mode_control_one        ; current_state.state_bit_0 ; clk      ;
+; N/A                                     ; None                                                ; 4.000 ns   ; mode_control_two        ; current_state.state_bit_1 ; clk      ;
+; N/A                                     ; None                                                ; 3.000 ns   ; set_total_bottles[4]    ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -4.000 ns  ; set_pills_per_bottle[6] ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -4.000 ns  ; set_pills_per_bottle[5] ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -4.000 ns  ; set_pills_per_bottle[4] ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -4.000 ns  ; set_pills_per_bottle[1] ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -4.000 ns  ; set_pills_per_bottle[0] ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -4.000 ns  ; set_pills_per_bottle[2] ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -4.000 ns  ; set_pills_per_bottle[3] ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[3]    ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -5.000 ns  ; set_total_bottles[4]    ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -6.000 ns  ; set_total_bottles[3]    ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_total_bottles[4]    ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_total_bottles[4]    ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_total_bottles[4]    ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_total_bottles[4]    ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_total_bottles[4]    ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_total_bottles[4]    ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_total_bottles[4]    ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_total_bottles[4]    ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[6] ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[5] ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[4] ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[1] ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[0] ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[2] ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -13.000 ns ; set_pills_per_bottle[3] ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[0]    ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[1]    ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[2]    ; error_flag                ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -14.000 ns ; set_total_bottles[3]    ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -15.000 ns ; set_total_bottles[2]    ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[6] ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[6] ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[6] ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[6] ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[6] ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[6] ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[6] ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[6] ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[5] ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[5] ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[5] ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[5] ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[5] ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[5] ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[5] ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[5] ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[4] ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[4] ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[4] ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[4] ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[4] ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[4] ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[4] ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[4] ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[1] ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[1] ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[1] ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[1] ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[1] ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[1] ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[1] ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[1] ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[0] ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[0] ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[0] ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[0] ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[0] ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[0] ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[0] ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[0] ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[2] ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[2] ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[2] ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[2] ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[2] ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[2] ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[2] ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[2] ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[3] ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[3] ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[3] ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[3] ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[3] ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[3] ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[3] ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -21.000 ns ; set_pills_per_bottle[3] ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -22.000 ns ; set_total_bottles[3]    ; pill_ones[2]              ; clk      ;
+; N/A                                     ; None                                                ; -22.000 ns ; set_total_bottles[3]    ; pill_tens[2]              ; clk      ;
+; N/A                                     ; None                                                ; -22.000 ns ; set_total_bottles[3]    ; pill_tens[1]              ; clk      ;
+; N/A                                     ; None                                                ; -22.000 ns ; set_total_bottles[3]    ; pill_tens[0]              ; clk      ;
+; N/A                                     ; None                                                ; -22.000 ns ; set_total_bottles[3]    ; bottle_ones[3]            ; clk      ;
+; N/A                                     ; None                                                ; -22.000 ns ; set_total_bottles[3]    ; pill_tens[3]              ; clk      ;
+; N/A                                     ; None                                                ; -22.000 ns ; set_total_bottles[3]    ; pill_ones[3]              ; clk      ;
+; N/A                                     ; None                                                ; -22.000 ns ; set_total_bottles[3]    ; pill_ones[1]              ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[0]    ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; bottle_tens[2]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; bottle_tens[1]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; bottle_tens[0]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; bottle_ones[2]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; bottle_ones[0]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; bottle_ones[1]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; done_flag                 ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[1]    ; speaker~reg0              ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[2]    ; pill_ones[0]              ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[2]    ; bottle_tens[3]            ; clk      ;
+; N/A                                     ; None                                                ; -23.000 ns ; set_total_bottles[2]    ; bottle_tens[2]            ; clk      ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;            ;                         ;                           ;          ;
++-----------------------------------------+-----------------------------------------------------+------------+-------------------------+---------------------------+----------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Classic Timing Analyzer
+    Info: Version 9.1 Build 222 10/21/2009 SJ Full Version
+    Info: Processing started: Tue Jan 01 02:05:03 2013
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off new_job -c new_job
+Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info: Started post-fitting delay annotation
+Info: Delay annotation completed successfully
+Warning: Timing Analysis does not support the analysis of latches as synchronous elements for the currently selected device family
+Warning: Found pins functioning as undefined clocks and/or memory enables
+    Info: Assuming node "clk" is an undefined clock
+Info: Clock "clk" has Internal fmax of 17.24 MHz between source register "pill_ones[2]" and destination register "pill_ones[2]" (period= 58.0 ns)
+    Info: + Longest register to register delay is 53.000 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC109; Fanout = 43; REG Node = 'pill_ones[2]'
+        Info: 2: + IC(2.000 ns) + CELL(7.000 ns) = 9.000 ns; Loc. = LC10; Fanout = 1; COMB Node = 'lpm_add_sub:Add2|addcore:adder|a_csnbuffer:result_node|sout_node[2]~71bal'
+        Info: 3: + IC(2.000 ns) + CELL(7.000 ns) = 18.000 ns; Loc. = LC29; Fanout = 6; COMB Node = 'lpm_add_sub:Add2|addcore:adder|a_csnbuffer:result_node|sout_node[2]~74'
+        Info: 4: + IC(2.000 ns) + CELL(6.000 ns) = 26.000 ns; Loc. = LC5; Fanout = 1; COMB Node = 'LessThan3~214'
+        Info: 5: + IC(0.000 ns) + CELL(2.000 ns) = 28.000 ns; Loc. = LC6; Fanout = 4; COMB Node = 'LessThan3~189'
+        Info: 6: + IC(2.000 ns) + CELL(7.000 ns) = 37.000 ns; Loc. = LC115; Fanout = 38; COMB Node = 'LessThan3~208'
+        Info: 7: + IC(2.000 ns) + CELL(8.000 ns) = 47.000 ns; Loc. = SEXP104; Fanout = 1; COMB Node = 'pill_ones[2]~91'
+        Info: 8: + IC(0.000 ns) + CELL(6.000 ns) = 53.000 ns; Loc. = LC109; Fanout = 43; REG Node = 'pill_ones[2]'
+        Info: Total cell delay = 43.000 ns ( 81.13 % )
+        Info: Total interconnect delay = 10.000 ns ( 18.87 % )
+    Info: - Smallest clock skew is 0.000 ns
+        Info: + Shortest clock path from clock "clk" to destination register is 10.000 ns
+            Info: 1: + IC(0.000 ns) + CELL(2.000 ns) = 2.000 ns; Loc. = PIN_58; Fanout = 44; CLK Node = 'clk'
+            Info: 2: + IC(2.000 ns) + CELL(6.000 ns) = 10.000 ns; Loc. = LC109; Fanout = 43; REG Node = 'pill_ones[2]'
+            Info: Total cell delay = 8.000 ns ( 80.00 % )
+            Info: Total interconnect delay = 2.000 ns ( 20.00 % )
+        Info: - Longest clock path from clock "clk" to source register is 10.000 ns
+            Info: 1: + IC(0.000 ns) + CELL(2.000 ns) = 2.000 ns; Loc. = PIN_58; Fanout = 44; CLK Node = 'clk'
+            Info: 2: + IC(2.000 ns) + CELL(6.000 ns) = 10.000 ns; Loc. = LC109; Fanout = 43; REG Node = 'pill_ones[2]'
+            Info: Total cell delay = 8.000 ns ( 80.00 % )
+            Info: Total interconnect delay = 2.000 ns ( 20.00 % )
+    Info: + Micro clock to output delay of source is 1.000 ns
+    Info: + Micro setup delay of destination is 4.000 ns
+Info: tsu for register "pill_ones[2]" (data pin = "set_pills_per_bottle[1]", clock pin = "clk") is 48.000 ns
+    Info: + Longest pin to register delay is 54.000 ns
+        Info: 1: + IC(0.000 ns) + CELL(2.000 ns) = 2.000 ns; Loc. = PIN_74; Fanout = 19; PIN Node = 'set_pills_per_bottle[1]'
+        Info: 2: + IC(2.000 ns) + CELL(8.000 ns) = 12.000 ns; Loc. = SEXP9; Fanout = 2; COMB Node = 'LessThan3~177'
+        Info: 3: + IC(0.000 ns) + CELL(7.000 ns) = 19.000 ns; Loc. = LC15; Fanout = 8; COMB Node = 'LessThan3~183'
+        Info: 4: + IC(2.000 ns) + CELL(6.000 ns) = 27.000 ns; Loc. = LC5; Fanout = 1; COMB Node = 'LessThan3~214'
+        Info: 5: + IC(0.000 ns) + CELL(2.000 ns) = 29.000 ns; Loc. = LC6; Fanout = 4; COMB Node = 'LessThan3~189'
+        Info: 6: + IC(2.000 ns) + CELL(7.000 ns) = 38.000 ns; Loc. = LC115; Fanout = 38; COMB Node = 'LessThan3~208'
+        Info: 7: + IC(2.000 ns) + CELL(8.000 ns) = 48.000 ns; Loc. = SEXP104; Fanout = 1; COMB Node = 'pill_ones[2]~91'
+        Info: 8: + IC(0.000 ns) + CELL(6.000 ns) = 54.000 ns; Loc. = LC109; Fanout = 43; REG Node = 'pill_ones[2]'
+        Info: Total cell delay = 46.000 ns ( 85.19 % )
+        Info: Total interconnect delay = 8.000 ns ( 14.81 % )
+    Info: + Micro setup delay of destination is 4.000 ns
+    Info: - Shortest clock path from clock "clk" to destination register is 10.000 ns
+        Info: 1: + IC(0.000 ns) + CELL(2.000 ns) = 2.000 ns; Loc. = PIN_58; Fanout = 44; CLK Node = 'clk'
+        Info: 2: + IC(2.000 ns) + CELL(6.000 ns) = 10.000 ns; Loc. = LC109; Fanout = 43; REG Node = 'pill_ones[2]'
+        Info: Total cell delay = 8.000 ns ( 80.00 % )
+        Info: Total interconnect delay = 2.000 ns ( 20.00 % )
+Info: tco from clock "clk" to destination pin "pill_count_bcd[6]" through register "pill_tens[2]" is 24.000 ns
+    Info: + Longest clock path from clock "clk" to source register is 10.000 ns
+        Info: 1: + IC(0.000 ns) + CELL(2.000 ns) = 2.000 ns; Loc. = PIN_58; Fanout = 44; CLK Node = 'clk'
+        Info: 2: + IC(2.000 ns) + CELL(6.000 ns) = 10.000 ns; Loc. = LC14; Fanout = 43; REG Node = 'pill_tens[2]'
+        Info: Total cell delay = 8.000 ns ( 80.00 % )
+        Info: Total interconnect delay = 2.000 ns ( 20.00 % )
+    Info: + Micro clock to output delay of source is 1.000 ns
+    Info: + Longest register to pin delay is 13.000 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LC14; Fanout = 43; REG Node = 'pill_tens[2]'
+        Info: 2: + IC(2.000 ns) + CELL(7.000 ns) = 9.000 ns; Loc. = LC25; Fanout = 1; COMB Node = 'pill_count_bcd~70'
+        Info: 3: + IC(0.000 ns) + CELL(4.000 ns) = 13.000 ns; Loc. = PIN_17; Fanout = 0; PIN Node = 'pill_count_bcd[6]'
+        Info: Total cell delay = 11.000 ns ( 84.62 % )
+        Info: Total interconnect delay = 2.000 ns ( 15.38 % )
+Info: Longest tpd from source pin "clk" to destination pin "pill_count_bcd[6]" is 15.000 ns
+    Info: 1: + IC(0.000 ns) + CELL(2.000 ns) = 2.000 ns; Loc. = PIN_58; Fanout = 44; CLK Node = 'clk'
+    Info: 2: + IC(2.000 ns) + CELL(7.000 ns) = 11.000 ns; Loc. = LC25; Fanout = 1; COMB Node = 'pill_count_bcd~70'
+    Info: 3: + IC(0.000 ns) + CELL(4.000 ns) = 15.000 ns; Loc. = PIN_17; Fanout = 0; PIN Node = 'pill_count_bcd[6]'
+    Info: Total cell delay = 13.000 ns ( 86.67 % )
+    Info: Total interconnect delay = 2.000 ns ( 13.33 % )
+Info: th for register "error_flag" (data pin = "set_total_bottles[4]", clock pin = "clk") is 4.000 ns
+    Info: + Longest clock path from clock "clk" to destination register is 10.000 ns
+        Info: 1: + IC(0.000 ns) + CELL(2.000 ns) = 2.000 ns; Loc. = PIN_58; Fanout = 44; CLK Node = 'clk'
+        Info: 2: + IC(2.000 ns) + CELL(6.000 ns) = 10.000 ns; Loc. = LC54; Fanout = 23; REG Node = 'error_flag'
+        Info: Total cell delay = 8.000 ns ( 80.00 % )
+        Info: Total interconnect delay = 2.000 ns ( 20.00 % )
+    Info: + Micro hold delay of destination is 4.000 ns
+    Info: - Shortest pin to register delay is 10.000 ns
+        Info: 1: + IC(0.000 ns) + CELL(2.000 ns) = 2.000 ns; Loc. = PIN_76; Fanout = 6; PIN Node = 'set_total_bottles[4]'
+        Info: 2: + IC(2.000 ns) + CELL(6.000 ns) = 10.000 ns; Loc. = LC54; Fanout = 23; REG Node = 'error_flag'
+        Info: Total cell delay = 8.000 ns ( 80.00 % )
+        Info: Total interconnect delay = 2.000 ns ( 20.00 % )
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 154 megabytes
+    Info: Processing ended: Tue Jan 01 02:05:03 2013
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+
+

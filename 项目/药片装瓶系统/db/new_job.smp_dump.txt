@@ -1,0 +1,7 @@
+
+State Machine - |new_job|current_state
+Name current_state.state_bit_1 current_state.state_bit_0 
+current_state.SPACE 0 0 
+current_state.SETTING 0 1 
+current_state.CLEARING 1 0 
+current_state.WORKING 1 1 

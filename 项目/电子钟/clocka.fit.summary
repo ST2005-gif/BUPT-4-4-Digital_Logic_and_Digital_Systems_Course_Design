@@ -1,0 +1,9 @@
+Fitter Status : Successful - Tue Jan 01 03:53:23 2013
+Quartus II Version : 9.1 Build 222 10/21/2009 SJ Full Version
+Revision Name : clocka
+Top-level Entity Name : clocka
+Family : MAX7000S
+Device : EPM7128SLC84-15
+Timing Models : Final
+Total macrocells : 119 / 128 ( 93 % )
+Total pins : 39 / 68 ( 57 % )
