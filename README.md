@@ -6,6 +6,10 @@
 
 项目为四人项目
 
+[项目说明](https://github.com/ST2005-gif/Course-Learning-Tips-from-bupt-scs/tree/main/%E5%A4%A7%E4%BA%8C%E4%B8%8B)
+
+认为有用的话就⭐一下吧！😃
+
 ### 项目设定
 使用语言：Verilog
 
